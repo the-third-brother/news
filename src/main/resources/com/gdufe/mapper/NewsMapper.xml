@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdufe.mapper.NewsMapper">
+    <select id="queryAllNews" resultType="com.gdufe.entity.NewsDetail">
+        select id,title,summary,author,createdate as createDate
+        from news_detail
+    </select>
+
+    <select id="queryByTitle" resultType="com.gdufe.entity.NewsDetail">
+        select id,title,summary,author,createdate as createDate
+        from news_detail
+        <where>
+            <if test="_parameter!=null and _parameter!=''">
+                and title like CONCAT('%',#{_parameter},'%')
+            </if>
+        </where>
+    </select>
+
+    <delete id="delNewsById">
+        delete from news_detail
+        where id = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,11 @@
+com\gdufe\mapper\NewsMapper.class
+com\gdufe\controller\NewsController.class
+com\gdufe\servlet\WebPathInitServlet.class
+com\gdufe\service\impl\CommentServiceImpl.class
+com\gdufe\service\impl\NewsServiceImpl.class
+com\gdufe\entity\NewsComment.class
+com\gdufe\entity\NewsDetail.class
+com\gdufe\controller\CommentController.class
+com\gdufe\mapper\CommentMapper.class
+com\gdufe\service\CommentService.class
+com\gdufe\service\NewsService.class

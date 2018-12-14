@@ -1,0 +1,47 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdufe.mapper.CommentMapper">
+    <resultMap id="newsComment" type="com.gdufe.entity.NewsComment">
+        <id property="id" column="id"></id>
+
+        <result property="content" column="content"></result>
+        <result property="author" column="author"></result>
+        <result property="createDate" column="createdate"></result>
+        <association property="newsDetail" javaType="com.gdufe.entity.NewsDetail">
+            <id property="id" column="id"></id>
+        </association>
+    </resultMap>
+
+    <select id="queryAll" resultMap="newsComment">
+        select *
+        from news_comment
+        where newsid = #{newsId}
+    </select>
+
+    <insert id="addComment">
+        insert into news_comment
+        <trim prefix="(" suffix=")" prefixOverrides=",">
+            <if test="newsDetail!=null">,newsid</if>
+            <if test="content!=null and content!=''">,content</if>
+            <if test="author!=null and author!=''">,author</if>
+            <if test="createDate!=null">,createdate</if>
+        </trim>
+        <trim prefix="values(" suffix=")" prefixOverrides=",">
+            <if test="newsDetail!=null">,#{newsDetail.id}</if>
+            <if test="content!=null and content!=''">,#{content}</if>
+            <if test="author!=null and author!=''">,#{author}</if>
+            <if test="createDate!=null">,#{createDate}</if>
+        </trim>
+    </insert>
+
+    <delete id="delCommentByNewsId">
+        delete from news_comment
+        where newsid = #{newsId}
+    </delete>
+
+    <delete id="delCommentByCommentId">
+        delete from news_comment
+        where id = #{id}
+    </delete>
+</mapper>
